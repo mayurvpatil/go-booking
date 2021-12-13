@@ -7,27 +7,37 @@ import (
 	"net/http"
 	"path/filepath"
 	"text/template"
+
+	"github.com/mayurvpatil/go-server/pkg/config"
 )
 
 var functions = template.FuncMap{}
 
+var app *config.AppConfig
+
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
+
 // renderTemplate renders templates using html/template
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
-	tc, err := CreateTemplateCache()
-	if err != nil {
-		log.Fatal(err)
+	var tc map[string]*template.Template
+	if app.UseCache {
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
 	}
 
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("could not get template cache")
 	}
 
 	buff := new(bytes.Buffer)
 	_ = t.Execute(buff, nil)
 
-	_, err = buff.WriteTo(w)
+	_, err := buff.WriteTo(w)
 	if err != nil {
 		fmt.Println("error writing template to browser")
 	}
