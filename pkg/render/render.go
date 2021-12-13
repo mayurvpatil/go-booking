@@ -9,6 +9,7 @@ import (
 	"text/template"
 
 	"github.com/mayurvpatil/go-server/pkg/config"
+	"github.com/mayurvpatil/go-server/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -19,8 +20,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+	return td
+}
+
 // renderTemplate renders templates using html/template
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 
 	var tc map[string]*template.Template
 	if app.UseCache {
@@ -34,8 +39,10 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 		log.Fatal("could not get template cache")
 	}
 
+	td = AddDefaultData(td)
+
 	buff := new(bytes.Buffer)
-	_ = t.Execute(buff, nil)
+	_ = t.Execute(buff, td)
 
 	_, err := buff.WriteTo(w)
 	if err != nil {
