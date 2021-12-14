@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/mayurvpatil/go-server/pkg/config"
-	"github.com/mayurvpatil/go-server/pkg/models"
+	"github.com/mayurvpatil/go-booking/pkg/config"
+	"github.com/mayurvpatil/go-booking/pkg/models"
 )
 
 var functions = template.FuncMap{}

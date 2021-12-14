@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/mayurvpatil/go-server/pkg/config"
-	"github.com/mayurvpatil/go-server/pkg/handler"
-	"github.com/mayurvpatil/go-server/pkg/render"
+	"github.com/mayurvpatil/go-booking/pkg/config"
+	"github.com/mayurvpatil/go-booking/pkg/handlers"
+	"github.com/mayurvpatil/go-booking/pkg/render"
 )
 
 const portNumber = ":8080"
@@ -41,8 +41,8 @@ func main() {
 	app.TemplateCache = tc
 	app.UseCache = true
 
-	repo := handler.NewRepo(&app)
-	handler.NewHandlers(repo)
+	repo := handlers.NewRepo(&app)
+	handlers.NewHandlers(repo)
 
 	render.NewTemplates(&app)
 

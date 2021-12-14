@@ -5,8 +5,8 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/mayurvpatil/go-server/pkg/config"
-	"github.com/mayurvpatil/go-server/pkg/handler"
+	"github.com/mayurvpatil/go-booking/pkg/config"
+	"github.com/mayurvpatil/go-booking/pkg/handlers"
 )
 
 func routes(app *config.AppConfig) http.Handler {
@@ -16,8 +16,8 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Use(NoSurf)
 	mux.Use(SessionLoad)
 
-	mux.Get("/", handler.Repo.Home)
-	mux.Get("/about", handler.Repo.About)
+	mux.Get("/", handlers.Repo.Home)
+	mux.Get("/about", handlers.Repo.About)
 
 	return mux
 }

@@ -1,11 +1,11 @@
-package handler
+package handlers
 
 import (
 	"net/http"
 
-	"github.com/mayurvpatil/go-server/pkg/config"
-	"github.com/mayurvpatil/go-server/pkg/models"
-	"github.com/mayurvpatil/go-server/pkg/render"
+	"github.com/mayurvpatil/go-booking/pkg/config"
+	"github.com/mayurvpatil/go-booking/pkg/models"
+	"github.com/mayurvpatil/go-booking/pkg/render"
 )
 
 // Repository variable
